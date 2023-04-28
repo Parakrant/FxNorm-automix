@@ -13,7 +13,9 @@ import sklearn
 
 from common_dataprocessing import load_wav, save_wav
 from common_miscellaneous import compute_stft, compute_istft
-from automix import utils
+
+# from automix import utils
+from utils import getFilesPath
 
 from multiprocessing import Pool, cpu_count
 from multiprocessing.pool import ThreadPool

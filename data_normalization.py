@@ -13,7 +13,7 @@ sys.setrecursionlimit(int(1e6))
 
 from common_dataprocessing import load_wav, save_wav, create_dataset
 from common_miscellaneous import compute_stft, compute_istft
-from automix import utils
+from utils import getFilesPath
 
 from multiprocessing import Pool, cpu_count
 from multiprocessing.pool import ThreadPool, Pool
@@ -46,6 +46,8 @@ EFFECTS = [
     "panning",
     "loudness",
 ]  # Effects to be normalized, order matters
+
+EFFECTS = ["eq"]  # Effects to be normalized, order matters
 
 # Audio settings
 SR = 44100
@@ -158,13 +160,14 @@ start_time_total = time.time()
 
 
 def get_audio_paths(path, names):
-    audio_path = utils.getFilesPath(path, "*.wav")
+    audio_path = getFilesPath(path, "*.wav")
 
     song_names = []
     for p in audio_path:
         song_names.append(os.path.dirname(p))
     song_names = set(song_names)
     audio_path_ = []
+    print(song_names)
     for p in song_names:
         for s in names:
             audio_path_.append(os.path.join(p, s + ".wav"))
@@ -504,6 +507,7 @@ if __name__ == "__main__":
     start_time = time.time()
 
     args = parser.parse_args()
+    print(args)
 
     PATH_DATASET = args.input_folder  # Folder that contains dataset to be normalized
     FILE_NAME = args.output_suffix  # Prefix to name normalized audio
@@ -532,24 +536,24 @@ if __name__ == "__main__":
     ir_path["reverb"] = args.impulse_responses
 
     # Conv Reverb
-    if ir_path["reverb"]:
-        IR = []
-        IR.extend(
-            create_dataset(
-                path=ir_path["reverb"],
-                accepted_sampling_rates=[SR],
-                sources=["impulse_response"],
-                mapped_sources={},
-                load_to_memory=True,
-                debug=False,
-            )[0]
-        )
-        REVERB_PARAMETERS.add(Parameter("index", 0, "int", minimum=0, maximum=len(IR)))
-    else:
-        EFFECTS.remove("reverb")
+    # if ir_path["reverb"]:
+    #     IR = []
+    #     IR.extend(
+    #         create_dataset(
+    #             path=ir_path["reverb"],
+    #             accepted_sampling_rates=[SR],
+    #             sources=["impulse_response"],
+    #             mapped_sources={},
+    #             load_to_memory=True,
+    #             debug=False,
+    #         )[0]
+    #     )
+    #     REVERB_PARAMETERS.add(Parameter("index", 0, "int", minimum=0, maximum=len(IR)))
+    # else:
+    #     EFFECTS.remove("reverb")
 
     audio_path_, audio_path_dict = get_audio_paths(PATH_DATASET, STEMS)
-
+    print(audio_path_dict)
     print(f"--- Processing {len(audio_path_)} --- total files")
     for p in audio_path_dict:
         print(f"--- Processing {len(audio_path_dict[p])} --- {p} files")
