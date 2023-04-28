@@ -126,6 +126,8 @@ def get_eq_matching(
         )
         audio_D = np.abs(audio_D)
         audio_D_avg = np.mean(audio_D, axis=0)[0]
+        print("inside eq matching")
+        print(audio_D_avg)
 
         m = ref_spec.shape[0]
 
@@ -139,6 +141,8 @@ def get_eq_matching(
         diff_eq = amp_to_db(ref_spec) - amp_to_db(audio_D_avg)
         diff_eq = db_to_amp(diff_eq)
         diff_eq = np.sqrt(diff_eq)
+        print("difference eq:" + str(diff_eq))
+        # desigining filter
 
         diff_filter = scipy.signal.firwin2(
             ntaps,

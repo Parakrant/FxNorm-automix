@@ -38,14 +38,15 @@ from pymixconsole.parameter import Parameter
 from pymixconsole.parameter_list import ParameterList
 
 
+# STEMS = ["vocals", "drums"]  # Stems to be normalized
 STEMS = ["vocals", "drums", "bass", "other"]  # Stems to be normalized
-EFFECTS = [
-    "reverb",
-    "eq",
-    "compression",
-    "panning",
-    "loudness",
-]  # Effects to be normalized, order matters
+# EFFECTS = [
+#     "reverb",
+#     "eq",
+#     "compression",
+#     "panning",
+#     "loudness",
+# ]  # Effects to be normalized, order matters
 
 EFFECTS = ["eq"]  # Effects to be normalized, order matters
 
@@ -205,6 +206,7 @@ def get_norm_feature(args_):
     path = args_[0]
     i = args_[1]
     effect = args_[2]
+    print(args_)
 
     source_str = os.path.basename(path).split(".wav")[0].split("_")[0]
 
@@ -278,7 +280,6 @@ def get_norm_feature(args_):
 
 def normalize_audio_path(args_):
     # for i, path in enumerate(audio_path_):
-
     path = args_[0]
     i = args_[1]
     effect = args_[2]
@@ -317,6 +318,7 @@ def normalize_audio_path(args_):
             if max_db > MIN_DB:
                 if effect == "eq":
                     for ch in range(audio_track.shape[1]):
+                        print("channel" + str(ch))
                         audio_eq_matched = get_eq_matching(
                             output_audio[:, ch],
                             features_mean[effect][src],
@@ -586,9 +588,12 @@ if __name__ == "__main__":
             j += len(i)
 
             _func_args = list(zip(audio_path_dict[key], i, [effect] * len(i)))
-
+            print(str(_func_args) + "**********************************")
             if LOAD_MEAN is False:
                 pool = Pool(CPU_COUNT)
+                print("----")
+                print(_func_args)
+                print("----")
                 features = pool.map(get_norm_feature, _func_args)
                 features_ = []
                 for j, i in enumerate(features):
@@ -596,20 +601,26 @@ if __name__ == "__main__":
                         features_.append(i)
 
                 features_dict[effect][key] = features_
-
+                print("feature dictionaries")
+                print(features_dict)
                 print(effect, key, len(features_dict[effect][key]))
+                print(features_dict[effect][key])
                 s = np.asarray(features_dict[effect][key])
                 s = np.mean(s, axis=0)
+                print("S")
+                print(s)
                 features_mean[effect][key] = s
+                print("feature mean dictionary")
+                print(features_mean)
 
                 if effect == "eq":
                     assert len(s) == 1 + FFT_SIZE // 2, len(s)
-                elif effect == "compression":
-                    assert len(s) == 2, len(s)
-                elif effect == "panning":
-                    assert len(s) == 1 + FFT_SIZE // 2, len(s)
-                elif effect == "loudness":
-                    assert len(s) == 1, len(s)
+                # elif effect == "compression":
+                #     assert len(s) == 2, len(s)
+                # elif effect == "panning":
+                #     assert len(s) == 1 + FFT_SIZE // 2, len(s)
+                # elif effect == "loudness":
+                #     assert len(s) == 1, len(s)
 
                 if effect == "eq":
                     if key in ["other", "vocals"]:
@@ -619,10 +630,10 @@ if __name__ == "__main__":
                     features_mean[effect][key] = scipy.signal.savgol_filter(
                         features_mean[effect][key], f, 1, mode="mirror"
                     )
-                elif effect == "panning":
-                    features_mean[effect][key] = scipy.signal.savgol_filter(
-                        features_mean[effect][key], 501, 1, mode="mirror"
-                    )
+                # elif effect == "panning":
+                #     features_mean[effect][key] = scipy.signal.savgol_filter(
+                #         features_mean[effect][key], 501, 1, mode="mirror"
+                #     )
 
             if NORM_AUDIO:
                 pool = Pool(CPU_COUNT)
