@@ -1,0 +1,6 @@
+name: /home/u571/work/venv
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+prefix: /home/u571/work/venv

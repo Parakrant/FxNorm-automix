@@ -1,0 +1,270 @@
+Starting training:
+	        Results folder: /home/u571/work/automix/trainings/results/20230503-h16m41s33_PT1.9.0+cu102_ours_S_Lb
+	    Configuration file: scripts/ours_S_Lb.py
+	Experiment description: ps.log
+
+
+Global variables:
+{   'AugmentationChain': <class 'common_audioeffects.AugmentationChain'>,
+    'DataType': <enum 'DataType'>,
+    'Loss': <class 'common_losses.Loss'>,
+    'Net': <class 'common_networkbuilding_cafx_tdcn_lstm_mix.Net'>,
+    'OrderedDict': <class 'collections.OrderedDict'>,
+    'Pool': <bound method BaseContext.Pool of <multiprocessing.context.DefaultContext object at 0x7f151cb7e0d0>>,
+    'Process': <class 'multiprocessing.context.Process'>,
+    'RF': 505,
+    'RawArray': <bound method BaseContext.RawArray of <multiprocessing.context.DefaultContext object at 0x7f151cb7e0d0>>,
+    'SimpleQueue': <bound method BaseContext.SimpleQueue of <multiprocessing.context.DefaultContext object at 0x7f151cb7e0d0>>,
+    'StereoLoss': <class 'common_losses.StereoLoss'>,
+    'StereoLoss2': <class 'common_losses.StereoLoss2'>,
+    'SummaryWriter': <class 'torch.utils.tensorboard.writer.SummaryWriter'>,
+    'SuperNet': <class 'common_supernet.SuperNet'>,
+    'ThreadPool': <class 'multiprocessing.pool.ThreadPool'>,
+    '__annotations__': {},
+    '__builtins__': <module 'builtins' (built-in)>,
+    '__cached__': None,
+    '__doc__': 'Config file.',
+    '__file__': '/home/u571/work/automix/scripts/train.py',
+    '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f152aca8c10>,
+    '__name__': '__main__',
+    '__package__': None,
+    '__spec__': None,
+    '__warningregistry__': {'version': 81},
+    'amp': <module 'torch.cuda.amp' from '/home/u571/work/venv/lib/python3.9/site-packages/torch/cuda/amp/__init__.py'>,
+    'argparse': <module 'argparse' from '/home/u571/work/venv/lib/python3.9/argparse.py'>,
+    'args': Namespace(config_file='scripts/ours_S_Lb.py', folder_suffix='ours_S_Lb', results_folder='/home/u571/work/automix/trainings', description='ps.log', weight_initialization=['/home/u571/work/automix/trainings/results/ours_S_pretrained/current_model_for_mixture.params']),
+    'compute_receptive_field': <function compute_receptive_field at 0x7f14c0936c10>,
+    'compute_stft': <function compute_stft at 0x7f14c09df940>,
+    'config': {   'ACCEPTED_SAMPLING_RATES': [44100],
+                  'AMSGRAD': True,
+                  'AUGMENTER_CHAIN': AugmentationChain(fxs=[], shuffle=False),
+                  'AUGMENTER_PADDING': (0, 0),
+                  'AUGMENTER_SOURCES': [],
+                  'BATCHED_TEST': False,
+                  'BATCHED_VALID': True,
+                  'BATCH_SIZE': 4,
+                  'CALCULATE_STATISTICS': True,
+                  'CUDNN_BENCHMARK': True,
+                  'DATA_DIR_TRAIN': [('/home/u571/work/automix/input', False)],
+                  'DATA_DIR_VALID': [('/home/u571/work/automix/input', False)],
+                  'DEBUG': False,
+                  'FFT_SIZE': 4096,
+                  'GRAD_CLIP_MAX_NORM': 0.2,
+                  'GRAD_CLIP_NORM_TYPE': 2,
+                  'GUARD_LEFT': 32446,
+                  'GUARD_RIGHT': 32446,
+                  'HOP_LENGTH': 1024,
+                  'INITIAL_LEARNING_RATE': 0.001,
+                  'INIT_NETWORK': None,
+                  'INPUTS': ['vocals_normalized', 'bass_normalized', 'drums_normalized', 'other_normalized'],
+                  'KERNEL_SIZE_ENCODER': 64,
+                  'KERNEL_SIZE_TB': 3,
+                  'L2_REGULARIZATION': 1e-07,
+                  'LEARNING_RATES': [   (1, 0.0),
+                                        (150, 0.001),
+                                        (50, 0.0003333333333333333),
+                                        (50, 0.0001),
+                                        (25, 3.3333333333333335e-05),
+                                        (25, 1e-05),
+                                        (10, 1e-06)],
+                  'MAPPED_SOURCES': {},
+                  'MAX_POOLING': 64,
+                  'MAX_PROCESSED_FREQUENCY': 16000.0,
+                  'MAX_VALIDATION_SEQ_LENGTH_TD': 10584000,
+                  'NET_TYPE': 'CAFX_TDCN_MIX',
+                  'NUM_DATAPROVIDING_PROCESSES': 2,
+                  'NUM_EPOCHS': 311,
+                  'NUM_MINIBATCHES_FOR_STATISTICS_ESTIMATION': 1000,
+                  'NUM_MINIBATCHES_PER_EPOCH': 1600,
+                  'N_BINS': 2049,
+                  'N_BINS_KEEP': 1486,
+                  'N_CHANNELS': 2,
+                  'N_FEATURES_ENCODER': 128,
+                  'N_FEATURES_OUT': 64,
+                  'N_FEATURES_SEPARATION_MODULE': 256,
+                  'N_FEATURES_TB': 128,
+                  'N_REPEATS': 4,
+                  'N_TB_PER_REPEAT': 6,
+                  'OUTPUTS': ['mixture'],
+                  'OVERLAP_PROBABILITY': {},
+                  'PRESENT_PROBABILITY': {},
+                  'PRETRAIN': False,
+                  'PRETRAIN_FRONT_END': True,
+                  'QUANTIZATION_BW': None,
+                  'QUANTIZATION_OP': None,
+                  'SAVE_NET_AT_EPOCHS': [],
+                  'SE_AMP_RATIO': 16,
+                  'SHUFFLE_CHANNELS': True,
+                  'SHUFFLE_STEMS': False,
+                  'SOURCES': [   'vocals_normalized',
+                                 'bass_normalized',
+                                 'drums_normalized',
+                                 'other_normalized',
+                                 'mixture'],
+                  'STFT_WINDOW': array([0.        , 0.00076699, 0.00153398, ..., 0.00230097, 0.00153398,
+       0.00076699]),
+                  'TARGETS': [('mixture',)],
+                  'TENSORBOARD': True,
+                  'TRAINING_SEQ_LENGTH': 440960,
+                  'TRAIN_LOSSES': [   StereoLoss2(
+  (_loss): Loss(
+    (_loss): L1Loss()
+  )
+  (fir): FIRFilterLoss(
+    (_loss): Loss(
+      (_loss): L1Loss()
+    )
+  )
+  (lossMSE): MSELoss()
+)],
+                  'USE_AMP': True,
+                  'VALID_LOSSES': OrderedDict([   (   'stereo_loss',
+                                                      StereoLoss2(
+  (_loss): Loss(
+    (_loss): L1Loss()
+  )
+  (fir): FIRFilterLoss(
+    (_loss): Loss(
+      (_loss): L1Loss()
+    )
+  )
+  (lossMSE): MSELoss()
+))])},
+    'copyfile': <function copyfile at 0x7f152973cd30>,
+    'cpu_count': <bound method BaseContext.cpu_count of <multiprocessing.context.DefaultContext object at 0x7f151cb7e0d0>>,
+    'create_dataset_mixing': <function create_dataset_mixing at 0x7f14c09dff70>,
+    'create_minibatch_mixing': <function create_minibatch_mixing at 0x7f14c09ea0d0>,
+    'f': <_io.TextIOWrapper name='/home/u571/work/automix/trainings/results/20230503-h16m41s33_PT1.9.0+cu102_ours_S_Lb/settings.log' mode='w' encoding='UTF-8'>,
+    'f_guard': 30,
+    'get_process_memory': <function get_process_memory at 0x7f14c09dfaf0>,
+    'guard': 32446,
+    'hostname': 'para',
+    'loss': StereoLoss2(
+  (_loss): Loss(
+    (_loss): L1Loss()
+  )
+  (fir): FIRFilterLoss(
+    (_loss): Loss(
+      (_loss): L1Loss()
+    )
+  )
+  (lossMSE): MSELoss()
+),
+    'ngpus': 2,
+    'ngpus_per_src': 2,
+    'nn': <module 'torch.nn' from '/home/u571/work/venv/lib/python3.9/site-packages/torch/nn/__init__.py'>,
+    'np': <module 'numpy' from '/home/u571/work/venv/lib/python3.9/site-packages/numpy/__init__.py'>,
+    'optim': <module 'torch.optim' from '/home/u571/work/venv/lib/python3.9/site-packages/torch/optim/__init__.py'>,
+    'os': <module 'os' from '/home/u571/work/venv/lib/python3.9/os.py'>,
+    'parser': ArgumentParser(prog='train.py', usage=None, description='Training parser', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True),
+    'pformat': <function pformat at 0x7f152978faf0>,
+    'plt': <module 'matplotlib.pyplot' from '/home/u571/work/venv/lib/python3.9/site-packages/matplotlib/pyplot.py'>,
+    'random': <module 'random' from '/home/u571/work/venv/lib/python3.9/random.py'>,
+    'recursive_getattr': <function recursive_getattr at 0x7f14c09df8b0>,
+    'results_folder': '/home/u571/work/automix/trainings/results/20230503-h16m41s33_PT1.9.0+cu102_ours_S_Lb',
+    'seq_length_td': 440960,
+    'sklearn': <module 'sklearn' from '/home/u571/work/venv/lib/python3.9/site-packages/sklearn/__init__.py'>,
+    'socket': <module 'socket' from '/home/u571/work/venv/lib/python3.9/socket.py'>,
+    'subprocess': <module 'subprocess' from '/home/u571/work/venv/lib/python3.9/subprocess.py'>,
+    'sys': <module 'sys' (built-in)>,
+    'td_length_from_fd': <function td_length_from_fd at 0x7f14c09dfd30>,
+    'tee': <Popen: returncode: None args: ['tee', '/home/u571/work/automix/trainings/re...>,
+    'time': <module 'time' (built-in)>,
+    'torch': <module 'torch' from '/home/u571/work/venv/lib/python3.9/site-packages/torch/__init__.py'>,
+    'uprint': <function uprint at 0x7f14c09d8e50>}
+
+
+Environment variables:
+{   'CHROME_DESKTOP': 'code-url-handler.desktop',
+    'COLORTERM': 'truecolor',
+    'CONDA_DEFAULT_ENV': '/home/u571/work/venv',
+    'CONDA_EXE': '/home/u571/miniconda3/bin/conda',
+    'CONDA_PREFIX': '/home/u571/work/venv',
+    'CONDA_PREFIX_1': '/home/u571/miniconda3',
+    'CONDA_PREFIX_2': '/home/u571/work/mp3-encoder/MP3-encoder/venv',
+    'CONDA_PREFIX_3': '/home/u571/miniconda3',
+    'CONDA_PROMPT_MODIFIER': '(venv)',
+    'CONDA_PYTHON_EXE': '/home/u571/miniconda3/bin/python',
+    'CONDA_SHLVL': '4',
+    'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1001/bus,guid=f245a20a9cbf37c8ec5a79376451eabd',
+    'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1001/bus,guid=f245a20a9cbf37c8ec5a79376451eabd',
+    'DBUS_STARTER_BUS_TYPE': 'session',
+    'DESKTOP_SESSION': 'ubuntu',
+    'DISPLAY': ':0',
+    'GDK_BACKEND': 'x11',
+    'GDMSESSION': 'ubuntu',
+    'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh',
+    'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated',
+    'GNOME_SETUP_DISPLAY': ':1',
+    'GNOME_SHELL_SESSION_MODE': 'ubuntu',
+    'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/2c527f71_59f2_4441_a178_7a5d76640e8e',
+    'GNOME_TERMINAL_SERVICE': ':1.120',
+    'GTK_MODULES': 'gail:atk-bridge',
+    'HOME': '/home/u571',
+    'IM_CONFIG_PHASE': '1',
+    'KMP_DUPLICATE_LIB_OK': 'True',
+    'KMP_INIT_AT_FORK': 'FALSE',
+    'LANG': 'en_CA.UTF-8',
+    'LANGUAGE': 'en_CA:en',
+    'LC_ADDRESS': 'en_IN.UTF-8',
+    'LC_IDENTIFICATION': 'en_IN.UTF-8',
+    'LC_MEASUREMENT': 'en_IN.UTF-8',
+    'LC_MONETARY': 'en_IN.UTF-8',
+    'LC_NAME': 'en_IN.UTF-8',
+    'LC_NUMERIC': 'en_IN.UTF-8',
+    'LC_PAPER': 'en_IN.UTF-8',
+    'LC_TELEPHONE': 'en_IN.UTF-8',
+    'LC_TIME': 'en_IN.UTF-8',
+    'LESSCLOSE': '/usr/bin/lesspipe %s %s',
+    'LESSOPEN': '| /usr/bin/lesspipe %s',
+    'LOGNAME': 'u571',
+    'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:',
+    'OLDPWD': '/home/u571/work',
+    'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME',
+    'PAPERSIZE': 'a4',
+    'PATH': '/home/u571/work/venv/bin:/home/u571/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin',
+    'PWD': '/home/u571/work/automix',
+    'QT_ACCESSIBILITY': '1',
+    'QT_IM_MODULE': 'ibus',
+    'SESSION_MANAGER': 'local/para:@/tmp/.ICE-unix/1384,unix/para:/tmp/.ICE-unix/1384',
+    'SHELL': '/bin/bash',
+    'SHLVL': '1',
+    'SSH_AGENT_LAUNCHER': 'gnome-keyring',
+    'SSH_AUTH_SOCK': '/run/user/1001/keyring/ssh',
+    'SYSTEMD_EXEC_PID': '1384',
+    'TERM': 'xterm-256color',
+    'TERM_PROGRAM': 'vscode',
+    'TERM_PROGRAM_VERSION': '1.77.3',
+    'USER': 'u571',
+    'USERNAME': 'u571',
+    'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '--ms-enable-electron-run-as-node',
+    'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js',
+    'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code',
+    'VSCODE_GIT_IPC_HANDLE': '/run/user/1001/vscode-git-3973a202cf.sock',
+    'VTE_VERSION': '6800',
+    'WAYLAND_DISPLAY': 'wayland-0',
+    'XAUTHORITY': '/run/user/1001/.mutter-Xwaylandauth.D7AN41',
+    'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg',
+    'XDG_CURRENT_DESKTOP': 'Unity',
+    'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop',
+    'XDG_MENU_PREFIX': 'gnome-',
+    'XDG_RUNTIME_DIR': '/run/user/1001',
+    'XDG_SESSION_CLASS': 'user',
+    'XDG_SESSION_DESKTOP': 'ubuntu',
+    'XDG_SESSION_TYPE': 'wayland',
+    'XMODIFIERS': '@im=ibus',
+    '_': '/home/u571/work/venv/bin/python',
+    '_CE_CONDA': '',
+    '_CE_M': ''}
+
+Maximum validation length is 4.00m
+Create dataset (train) ...
+
+Creating dataset for path=/home/u571/work/automix/input ...
+Processing mixture (1 of 9): bass.wav
+Traceback (most recent call last):
+  File "/home/u571/work/automix/scripts/train.py", line 180, in <module>
+    create_dataset_mixing(
+  File "/home/u571/work/automix/scripts/common_dataprocessing.py", line 285, in create_dataset_mixing
+    files = os.listdir(os.path.join(path, d))
+NotADirectoryError: [Errno 20] Not a directory: '/home/u571/work/automix/input/bass.wav'
