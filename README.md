@@ -19,6 +19,7 @@ For technical details of the work, please see:
    year={2022}
 }
 ```
+
 Main Project Page: https://marco-martinez-sony.github.io/FxNorm-automix/
 
 ArXiv Paper: https://arxiv.org/abs/2208.11428
@@ -28,6 +29,7 @@ ArXiv Paper: https://arxiv.org/abs/2208.11428
 ```
   python setup.py install
 ```
+
 ```
   pip install -r requirements.txt
 ```
@@ -38,7 +40,7 @@ This script computes the average features for the training dataset, then normali
 
 ```
   bash scripts/data_normalization.sh
-```   
+```
 
 ## Training models
 
@@ -52,20 +54,15 @@ The following scripts train FxNorm-Automix (Ours) and Wave-U-Net (WUN) models. C
 
 ### FxNorm-automix
 
-
 ```
   bash scripts/train_fxnorm_automix.sh
 ```
 
-
 ### WAVE-U-Net
-
 
 ```
   bash scripts/train_wun.sh
 ```
-
-
 
 ## Evaluate models
 
@@ -75,26 +72,23 @@ This script evaluates a trained model on a given test dataset; mixes and metrics
   bash scripts/evaluate.sh
 ```
 
+## Inference
 
-## Inference 
-
-This script runs inference on a given multitrack 
+This script runs inference on a given multitrack
 
 ```
   bash scripts/inference.sh
 ```
-                          
+
 ## Trained Models
 
 Trained models can be found at `training/results` and their `config.py` files at `configs/ISMIR`
 
-The available models are *ours_S_La*, *ours_S_Lb*, *ours_S_pretrained*, and *wun_S_Lb*
+The available models are _ours_S_La_, _ours_S_Lb_, _ours_S_pretrained_, and _wun_S_Lb_
 
 ## Computed features
 
 The average features computed on MUSDB18 can be found at `training/features/features_MUSDB18.npy`
-
-                 
 
 ## Impulse Responses (IR)
 
@@ -103,22 +97,22 @@ Due to copyright issues, the IRs used during training, evaluation and inference 
 However, users can provide their IRs for data augmentation. Ideally, the reverberation time (RT) of the IRs should be between 2 and 4 seconds. For "pre-reverb" IRs (when doing inference on real dry data), RT should be less than 1.5 seconds. (Stereo and Mono are supported)
 
 The data loader expects each IR to be in an individual folder and named impulse_response.wav
-e.g. /path/to/IR/impulse-response-001/impulse_response.wav 
+e.g. /path/to/IR/impulse-response-001/impulse_response.wav
 
 ## Requirements
 
-* librosa>=0.8.1
-* psutil
-* `pymixconsole` (`pip install git+https://github.com/csteinmetz1/pymixconsole`)
-* `pyloudnorm` (`pip install git+https://github.com/csteinmetz1/pyloudnorm`)
-* `aubio` (`pip install git+https://github.com/aubio/aubio`)
-* scipy>=1.6.3
-* soundfile
-* soxbindings
-* sty
-* tensorboard
-* setuptools==59.5.0
-* torch==1.9.0
+- librosa>=0.8.1
+- psutil
+- `pymixconsole` (`pip install git+https://github.com/csteinmetz1/pymixconsole`)
+- `pyloudnorm` (`pip install git+https://github.com/csteinmetz1/pyloudnorm`)
+- `aubio` (`pip install git+https://github.com/aubio/aubio`)
+- scipy>=1.6.3
+- soundfile
+- soxbindings
+- sty
+- tensorboard
+- setuptools==59.5.0
+- torch==1.9.0
 
+make sure use 11.8 cuda library
 Please see [requirements.txt](https://github.com/sony/FxNorm-automix/blob/main/requirements.txt)
-
