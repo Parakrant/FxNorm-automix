@@ -1,0 +1,106 @@
+Loading configuration from ../configs/ISMIR/ours_S_Lb.py
+Loading stems...
+
+Creating dataset for path=/home/FxNorm-automix/test ...
+Processing mixture (1 of 1): song1
+	Adding function handle for "bass" from file bass.wav
+	Adding function handle for "drums" from file drums.wav
+	Adding function handle for "mixture" from file mixture.wav
+	Adding function handle for "other" from file other.wav
+	Adding function handle for "vocals" from file vocals.wav
+Finished preparation of dataset. Found in total the following material (in 1 directories):
+	bass: 0.06 hours
+	drums: 0.06 hours
+	mixture: 0.06 hours
+	other: 0.06 hours
+	vocals: 0.06 hours
+
+ song1 0
+['bass', 'drums', 'mixture', 'other', 'vocals']
+Saving ../mixes/20230525-h08m50s13_PT1.9.0+cu111_ours_S_Lb/test_wet/song1/ours_S_Lb_mixture.wav
+--- It took 38.61 seconds ---
+--- to mix 200.34 seconds ---
+Computing loudness features...
+--- It took 0.02 mins ---
+--- to compute loudness features ---
+--- for 1 songs ---
+Saving ../mixes/20230525-h08m50s13_PT1.9.0+cu111_ours_S_Lb/test_wet/loudness.npy
+Computing spectral features...
+--- It took 0.12 mins ---
+--- to compute spectral features ---
+--- for 1 songs ---
+Saving ../mixes/20230525-h08m50s13_PT1.9.0+cu111_ours_S_Lb/test_wet/spectral.npy
+Computing panning features...
+--- It took 0.04 mins ---
+--- to compute panning features ---
+--- for 1 songs ---
+Saving ../mixes/20230525-h08m50s13_PT1.9.0+cu111_ours_S_Lb/test_wet/panning.npy
+Computing dynamic features...
+--- It took 0.11 mins ---
+--- to compute dynamic features ---
+--- for 1 songs ---
+Saving ../mixes/20230525-h08m50s13_PT1.9.0+cu111_ours_S_Lb/test_wet/dynamic.npy
+
+ Loudness 
+
+d_lufs
+	 [0.19278393500738703]
+d_peak
+	 [33.1792367514302]
+
+ Spectral 
+
+centroid_mean
+	 [0.2619031722218931]
+bandwidth_mean
+	 [0.13745531797892835]
+contrast_l_mean
+	 [0.1451880626401364]
+contrast_m_mean
+	 [0.020868448412068644]
+contrast_h_mean
+	 [0.28290527476789484]
+rolloff_mean
+	 [0.2948026321104041]
+flatness_mean
+	 [1.189924]
+mape_mean
+	 [0.333292415689293]
+
+ Panning 
+
+P_t_mean
+	 [0.017212153469373676]
+P_l_mean
+	 [0.195710765811085]
+P_m_mean
+	 [0.02628928181126173]
+P_h_mean
+	 [0.018757610030149675]
+mape_mean
+	 [0.06449245278046753]
+
+ Dynamic 
+
+rms_mean
+	 [0.0711058838996363]
+dyn_mean
+	 [0.024562035709990188]
+crest_mean
+	 [0.15424668913393014]
+l_ratio_mean_mape
+	 [1919714500000.0]
+l_ratio_mean_l2
+	 [1248.2639]
+mape_mean
+	 [0.08330486958118555]
+--- FINISHED - It took 0.02 hours ---
+--- to mix and compute all features ---
+--- for 1 songs ---
+--- Mean real-time ratio - nan ---
+Dynamic features for mixture 0...
+Loudness features for mixture 0...
+bass normalizing ['eq']...
+drums normalizing ['eq']...
+vocals normalizing ['eq']...
+other normalizing ['eq']...

@@ -1,0 +1,689 @@
+Starting training:
+	        Results folder: ../trainings/results/20230525-h08m02s00_PT1.9.0+cu111_ours_S_Lb
+	    Configuration file: ../configs/ISMIR/ours_S_Lb.py
+	Experiment description: ours_S_Lb
+
+
+Global variables:
+{   'AugmentationChain': <class 'automix.common_audioeffects.AugmentationChain'>,
+    'DataType': <enum 'DataType'>,
+    'Loss': <class 'automix.common_losses.Loss'>,
+    'Net': <class 'automix.common_networkbuilding_cafx_tdcn_lstm_mix.Net'>,
+    'OrderedDict': <class 'collections.OrderedDict'>,
+    'Pool': <bound method BaseContext.Pool of <multiprocessing.context.DefaultContext object at 0x7f8d16a10ad0>>,
+    'Process': <class 'multiprocessing.context.Process'>,
+    'RF': 505,
+    'RawArray': <bound method BaseContext.RawArray of <multiprocessing.context.DefaultContext object at 0x7f8d16a10ad0>>,
+    'SimpleQueue': <bound method BaseContext.SimpleQueue of <multiprocessing.context.DefaultContext object at 0x7f8d16a10ad0>>,
+    'StereoLoss': <class 'automix.common_losses.StereoLoss'>,
+    'StereoLoss2': <class 'automix.common_losses.StereoLoss2'>,
+    'SummaryWriter': <class 'torch.utils.tensorboard.writer.SummaryWriter'>,
+    'SuperNet': <class 'automix.common_supernet.SuperNet'>,
+    'ThreadPool': <class 'multiprocessing.pool.ThreadPool'>,
+    '__annotations__': {},
+    '__builtins__': <module 'builtins' (built-in)>,
+    '__cached__': None,
+    '__doc__': 'Config file.',
+    '__file__': '../automix/train.py',
+    '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8d1e34df10>,
+    '__name__': '__main__',
+    '__package__': None,
+    '__spec__': None,
+    '__warningregistry__': {'version': 81},
+    'amp': <module 'torch.cuda.amp' from '/home/venv/lib/python3.7/site-packages/torch/cuda/amp/__init__.py'>,
+    'argparse': <module 'argparse' from '/home/venv/lib/python3.7/argparse.py'>,
+    'args': Namespace(config_file='../configs/ISMIR/ours_S_Lb.py', description='ours_S_Lb', folder_suffix='ours_S_Lb', results_folder='../trainings', weight_initialization=['../trainings/results/ours_S_pretrained/current_model_for_mixture.params']),
+    'compute_receptive_field': <function compute_receptive_field at 0x7f8c0f72a440>,
+    'compute_stft': <function compute_stft at 0x7f8c0fa07c20>,
+    'config': {   'ACCEPTED_SAMPLING_RATES': [44100],
+                  'AMSGRAD': True,
+                  'AUGMENTER_CHAIN': AugmentationChain(fxs=[], shuffle=False),
+                  'AUGMENTER_PADDING': (0, 0),
+                  'AUGMENTER_SOURCES': [],
+                  'BATCHED_TEST': False,
+                  'BATCHED_VALID': True,
+                  'BATCH_SIZE': 4,
+                  'CALCULATE_STATISTICS': True,
+                  'CUDNN_BENCHMARK': True,
+                  'DATA_DIR_TRAIN': [('/home/FxNorm-automix/train', False)],
+                  'DATA_DIR_VALID': [('/home/FxNorm-automix/val', False)],
+                  'DEBUG': False,
+                  'FFT_SIZE': 4096,
+                  'GRAD_CLIP_MAX_NORM': 0.2,
+                  'GRAD_CLIP_NORM_TYPE': 2,
+                  'GUARD_LEFT': 32446,
+                  'GUARD_RIGHT': 32446,
+                  'HOP_LENGTH': 1024,
+                  'INITIAL_LEARNING_RATE': 0.001,
+                  'INIT_NETWORK': None,
+                  'INPUTS': ['vocals_normalized', 'bass_normalized', 'drums_normalized', 'other_normalized'],
+                  'KERNEL_SIZE_ENCODER': 64,
+                  'KERNEL_SIZE_TB': 3,
+                  'L2_REGULARIZATION': 1e-07,
+                  'LEARNING_RATES': [   (1, 0.0),
+                                        (150, 0.001),
+                                        (50, 0.0003333333333333333),
+                                        (50, 0.0001),
+                                        (25, 3.3333333333333335e-05),
+                                        (25, 1e-05),
+                                        (10, 1e-06)],
+                  'MAPPED_SOURCES': {},
+                  'MAX_POOLING': 64,
+                  'MAX_PROCESSED_FREQUENCY': 16000.0,
+                  'MAX_VALIDATION_SEQ_LENGTH_TD': 10584000,
+                  'NET_TYPE': 'CAFX_TDCN_MIX',
+                  'NUM_DATAPROVIDING_PROCESSES': 8,
+                  'NUM_EPOCHS': 311,
+                  'NUM_MINIBATCHES_FOR_STATISTICS_ESTIMATION': 1000,
+                  'NUM_MINIBATCHES_PER_EPOCH': 200,
+                  'N_BINS': 2049,
+                  'N_BINS_KEEP': 1486,
+                  'N_CHANNELS': 2,
+                  'N_FEATURES_ENCODER': 128,
+                  'N_FEATURES_OUT': 64,
+                  'N_FEATURES_SEPARATION_MODULE': 256,
+                  'N_FEATURES_TB': 128,
+                  'N_REPEATS': 4,
+                  'N_TB_PER_REPEAT': 6,
+                  'OUTPUTS': ['mixture'],
+                  'OVERLAP_PROBABILITY': {},
+                  'PRESENT_PROBABILITY': {},
+                  'PRETRAIN': False,
+                  'PRETRAIN_FRONT_END': True,
+                  'QUANTIZATION_BW': None,
+                  'QUANTIZATION_OP': None,
+                  'SAVE_NET_AT_EPOCHS': [],
+                  'SE_AMP_RATIO': 16,
+                  'SHUFFLE_CHANNELS': True,
+                  'SHUFFLE_STEMS': False,
+                  'SOURCES': [   'vocals_normalized',
+                                 'bass_normalized',
+                                 'drums_normalized',
+                                 'other_normalized',
+                                 'mixture'],
+                  'STFT_WINDOW': array([0.        , 0.00076699, 0.00153398, ..., 0.00230097, 0.00153398,
+       0.00076699]),
+                  'TARGETS': [('mixture',)],
+                  'TENSORBOARD': True,
+                  'TRAINING_SEQ_LENGTH': 440960,
+                  'TRAIN_LOSSES': [   StereoLoss2(
+  (_loss): Loss(
+    (_loss): L1Loss()
+  )
+  (fir): FIRFilterLoss(
+    (_loss): Loss(
+      (_loss): L1Loss()
+    )
+  )
+  (lossMSE): MSELoss()
+)],
+                  'USE_AMP': True,
+                  'VALID_LOSSES': OrderedDict([   (   'stereo_loss',
+                                                      StereoLoss2(
+  (_loss): Loss(
+    (_loss): L1Loss()
+  )
+  (fir): FIRFilterLoss(
+    (_loss): Loss(
+      (_loss): L1Loss()
+    )
+  )
+  (lossMSE): MSELoss()
+))])},
+    'copyfile': <function copyfile at 0x7f8d1df31290>,
+    'cpu_count': <bound method BaseContext.cpu_count of <multiprocessing.context.DefaultContext object at 0x7f8d16a10ad0>>,
+    'create_dataset_mixing': <function create_dataset_mixing at 0x7f8c0fa14200>,
+    'create_minibatch_mixing': <function create_minibatch_mixing at 0x7f8c0fa14320>,
+    'f': <_io.TextIOWrapper name='../trainings/results/20230525-h08m02s00_PT1.9.0+cu111_ours_S_Lb/settings.log' mode='w' encoding='UTF-8'>,
+    'f_guard': 30,
+    'get_process_memory': <function get_process_memory at 0x7f8c0fa07dd0>,
+    'guard': 32446,
+    'loss': StereoLoss2(
+  (_loss): Loss(
+    (_loss): L1Loss()
+  )
+  (fir): FIRFilterLoss(
+    (_loss): Loss(
+      (_loss): L1Loss()
+    )
+  )
+  (lossMSE): MSELoss()
+),
+    'ngpus': 1,
+    'ngpus_per_src': 1,
+    'nn': <module 'torch.nn' from '/home/venv/lib/python3.7/site-packages/torch/nn/__init__.py'>,
+    'np': <module 'numpy' from '/home/venv/lib/python3.7/site-packages/numpy/__init__.py'>,
+    'optim': <module 'torch.optim' from '/home/venv/lib/python3.7/site-packages/torch/optim/__init__.py'>,
+    'os': <module 'os' from '/home/venv/lib/python3.7/os.py'>,
+    'parser': ArgumentParser(prog='train.py', usage=None, description='Training parser', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True),
+    'pformat': <function pformat at 0x7f8d1df8a440>,
+    'plt': <module 'matplotlib.pyplot' from '/home/venv/lib/python3.7/site-packages/matplotlib/pyplot.py'>,
+    'random': <module 'random' from '/home/venv/lib/python3.7/random.py'>,
+    'recursive_getattr': <function recursive_getattr at 0x7f8c0fa02b00>,
+    'results_folder': '../trainings/results/20230525-h08m02s00_PT1.9.0+cu111_ours_S_Lb',
+    'seq_length_td': 440960,
+    'sklearn': <module 'sklearn' from '/home/venv/lib/python3.7/site-packages/sklearn/__init__.py'>,
+    'socket': <module 'socket' from '/home/venv/lib/python3.7/socket.py'>,
+    'subprocess': <module 'subprocess' from '/home/venv/lib/python3.7/subprocess.py'>,
+    'sys': <module 'sys' (built-in)>,
+    'td_length_from_fd': <function td_length_from_fd at 0x7f8c0fa14050>,
+    'tee': <subprocess.Popen object at 0x7f8c0fa2cf50>,
+    'time': <module 'time' (built-in)>,
+    'torch': <module 'torch' from '/home/venv/lib/python3.7/site-packages/torch/__init__.py'>,
+    'uprint': <function uprint at 0x7f8c172f3a70>}
+
+
+Environment variables:
+{   'CONDA_DEFAULT_ENV': '/home/venv',
+    'CONDA_EXE': '/home/enter/bin/conda',
+    'CONDA_PREFIX': '/home/venv',
+    'CONDA_PREFIX_1': '/home/enter',
+    'CONDA_PROMPT_MODIFIER': '(/home/venv) ',
+    'CONDA_PYTHON_EXE': '/home/enter/bin/python',
+    'CONDA_SHLVL': '2',
+    'CONFIGS_FOLDER': '../configs/ISMIR',
+    'CUDA_VISIBLE_DEVICES': '0',
+    'DESCRIPTION': 'ours_S_Lb',
+    'FOLDER_SUFFIX': 'ours_S_Lb',
+    'HOME': '/root',
+    'KMP_DUPLICATE_LIB_OK': 'True',
+    'KMP_INIT_AT_FORK': 'FALSE',
+    'LC_CTYPE': 'C.UTF-8',
+    'LESSCLOSE': '/usr/bin/lesspipe %s %s',
+    'LESSOPEN': '| /usr/bin/lesspipe %s',
+    'LOGNAME': 'root',
+    'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:',
+    'MOTD_SHOWN': 'pam',
+    'OLDPWD': '/home/FxNorm-automix',
+    'OMP_NUM_THREADS': '1',
+    'PATH': '/home/venv/bin:/home/enter/condabin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'PWD': '/home/FxNorm-automix/scripts',
+    'RESULTS_FOLDER': '../trainings',
+    'SHELL': '/bin/bash',
+    'SHLVL': '2',
+    'SSH_CLIENT': '203.198.8.93 62592 22',
+    'SSH_CONNECTION': '203.198.8.93 62592 172.17.0.2 22',
+    'SSH_TTY': '/dev/pts/0',
+    'TERM': 'screen',
+    'TMUX': '/tmp/tmux-0/default,482,0',
+    'TMUX_PANE': '%0',
+    'USER': 'root',
+    '_': '/home/venv/bin/python',
+    '_CE_CONDA': '',
+    '_CE_M': ''}
+
+Maximum validation length is 4.00m
+Create dataset (train) ...
+
+Creating dataset for path=/home/FxNorm-automix/train ...
+Processing mixture (1 of 1): song1
+	Ignoring unknown source from file bass.wav
+	Adding function handle for "bass_normalized" from file bass_normalized.wav
+	Ignoring unknown source from file drums.wav
+	Adding function handle for "drums_normalized" from file drums_normalized.wav
+	Adding function handle for "mixture" from file mixture.wav
+	Ignoring unknown source from file other.wav
+	Adding function handle for "other_normalized" from file other_normalized.wav
+	Ignoring unknown source from file vocals.wav
+	Adding function handle for "vocals_normalized" from file vocals_normalized.wav
+Finished preparation of dataset. Found in total the following material (in 1 directories):
+	bass_normalized: 0.06 hours
+	drums_normalized: 0.06 hours
+	mixture: 0.06 hours
+	other_normalized: 0.06 hours
+	vocals_normalized: 0.06 hours
+	took 0.00s, current memory consumption is 1.13GB
+
+Create dataset (valid) ...
+
+Creating dataset for path=/home/FxNorm-automix/val ...
+Processing mixture (1 of 1): song1
+	Ignoring unknown source from file bass.wav
+	Adding function handle for "bass_normalized" from file bass_normalized.wav
+	Ignoring unknown source from file drums.wav
+	Adding function handle for "drums_normalized" from file drums_normalized.wav
+	Adding function handle for "mixture" from file mixture.wav
+	Ignoring unknown source from file other.wav
+	Adding function handle for "other_normalized" from file other_normalized.wav
+	Ignoring unknown source from file vocals.wav
+	Adding function handle for "vocals_normalized" from file vocals_normalized.wav
+Finished preparation of dataset. Found in total the following material (in 1 directories):
+	bass_normalized: 0.06 hours
+	drums_normalized: 0.06 hours
+	mixture: 0.06 hours
+	other_normalized: 0.06 hours
+	vocals_normalized: 0.06 hours
+	took 0.00s, current memory consumption is 1.13GB
+
+Compute baseline losses ...
+	Lower baselines on validation dataset (time-domain, l1):
+		Mean	Median
+	mixture	0.048	0.048
+
+	Lower baselines on validation dataset (freq-domain, l1):
+		Mean	Median
+	mixture	0.732	0.732
+
+	Lower baselines on validation dataset (time-domain, l2):
+		Mean	Median
+	mixture	0.004	0.004
+
+	Lower baselines on validation dataset (freq-domain, l2):
+		Mean	Median
+	mixture	6.643	6.643
+
+	took 3.71s, current memory consumption is 1.33GB
+
+Compute mean/scale on training set ...
+	took 0.56s, current memory consumption is 1.33GB
+
+Create shared memory variables ...
+	took 0.24s, current memory consumption is 1.85GB
+
+Starting data providing process 0 with random seed 465394416 and 2909521778
+Starting data providing process 1 with random seed 279762505 and 830275795
+Starting data providing process 2 with random seed 983780054 and 1201149432
+Starting data providing process 3 with random seed 2186425379 and 1376263787
+Starting data providing process 4 with random seed 2394134950 and 2624105225
+Starting data providing process 5 with random seed 2908167862 and 4245482779
+Starting data providing process 6 with random seed 989562244 and 2621478666
+Starting data providing process 7 with random seed 4231770015 and 869354375
+WARNING: Could not save TorchScript model.
+
+Network parameters for CAFX_TDCN_MIX:
+	layerNorm.weight              	[128]                    	128
+	layerNorm.bias                	[128]                    	128
+	bottleneck_conv1x1.weight     	[256, 128, 1]            	32768
+	bottleneck_conv1x1.bias       	[256]                    	256
+	repeats.0.0.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.0.0.conv1x1.bias      	[128]                    	128
+	repeats.0.0.nonlinearity1.weight	[1]                      	1
+	repeats.0.0.norm1.weight      	[128]                    	128
+	repeats.0.0.norm1.bias        	[128]                    	128
+	repeats.0.0.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.0.0.depthwise_conv.bias	[128]                    	128
+	repeats.0.0.nonlinearity2.weight	[1]                      	1
+	repeats.0.0.norm2.weight      	[128]                    	128
+	repeats.0.0.norm2.bias        	[128]                    	128
+	repeats.0.0.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.0.0.skip_out.bias     	[64]                     	64
+	repeats.0.0.res_out.weight    	[256, 128, 1]            	32768
+	repeats.0.0.res_out.bias      	[256]                    	256
+	repeats.0.1.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.0.1.conv1x1.bias      	[128]                    	128
+	repeats.0.1.nonlinearity1.weight	[1]                      	1
+	repeats.0.1.norm1.weight      	[128]                    	128
+	repeats.0.1.norm1.bias        	[128]                    	128
+	repeats.0.1.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.0.1.depthwise_conv.bias	[128]                    	128
+	repeats.0.1.nonlinearity2.weight	[1]                      	1
+	repeats.0.1.norm2.weight      	[128]                    	128
+	repeats.0.1.norm2.bias        	[128]                    	128
+	repeats.0.1.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.0.1.skip_out.bias     	[64]                     	64
+	repeats.0.1.res_out.weight    	[256, 128, 1]            	32768
+	repeats.0.1.res_out.bias      	[256]                    	256
+	repeats.0.2.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.0.2.conv1x1.bias      	[128]                    	128
+	repeats.0.2.nonlinearity1.weight	[1]                      	1
+	repeats.0.2.norm1.weight      	[128]                    	128
+	repeats.0.2.norm1.bias        	[128]                    	128
+	repeats.0.2.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.0.2.depthwise_conv.bias	[128]                    	128
+	repeats.0.2.nonlinearity2.weight	[1]                      	1
+	repeats.0.2.norm2.weight      	[128]                    	128
+	repeats.0.2.norm2.bias        	[128]                    	128
+	repeats.0.2.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.0.2.skip_out.bias     	[64]                     	64
+	repeats.0.2.res_out.weight    	[256, 128, 1]            	32768
+	repeats.0.2.res_out.bias      	[256]                    	256
+	repeats.0.3.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.0.3.conv1x1.bias      	[128]                    	128
+	repeats.0.3.nonlinearity1.weight	[1]                      	1
+	repeats.0.3.norm1.weight      	[128]                    	128
+	repeats.0.3.norm1.bias        	[128]                    	128
+	repeats.0.3.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.0.3.depthwise_conv.bias	[128]                    	128
+	repeats.0.3.nonlinearity2.weight	[1]                      	1
+	repeats.0.3.norm2.weight      	[128]                    	128
+	repeats.0.3.norm2.bias        	[128]                    	128
+	repeats.0.3.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.0.3.skip_out.bias     	[64]                     	64
+	repeats.0.3.res_out.weight    	[256, 128, 1]            	32768
+	repeats.0.3.res_out.bias      	[256]                    	256
+	repeats.0.4.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.0.4.conv1x1.bias      	[128]                    	128
+	repeats.0.4.nonlinearity1.weight	[1]                      	1
+	repeats.0.4.norm1.weight      	[128]                    	128
+	repeats.0.4.norm1.bias        	[128]                    	128
+	repeats.0.4.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.0.4.depthwise_conv.bias	[128]                    	128
+	repeats.0.4.nonlinearity2.weight	[1]                      	1
+	repeats.0.4.norm2.weight      	[128]                    	128
+	repeats.0.4.norm2.bias        	[128]                    	128
+	repeats.0.4.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.0.4.skip_out.bias     	[64]                     	64
+	repeats.0.4.res_out.weight    	[256, 128, 1]            	32768
+	repeats.0.4.res_out.bias      	[256]                    	256
+	repeats.0.5.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.0.5.conv1x1.bias      	[128]                    	128
+	repeats.0.5.nonlinearity1.weight	[1]                      	1
+	repeats.0.5.norm1.weight      	[128]                    	128
+	repeats.0.5.norm1.bias        	[128]                    	128
+	repeats.0.5.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.0.5.depthwise_conv.bias	[128]                    	128
+	repeats.0.5.nonlinearity2.weight	[1]                      	1
+	repeats.0.5.norm2.weight      	[128]                    	128
+	repeats.0.5.norm2.bias        	[128]                    	128
+	repeats.0.5.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.0.5.skip_out.bias     	[64]                     	64
+	repeats.0.5.res_out.weight    	[256, 128, 1]            	32768
+	repeats.0.5.res_out.bias      	[256]                    	256
+	repeats.1.0.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.1.0.conv1x1.bias      	[128]                    	128
+	repeats.1.0.nonlinearity1.weight	[1]                      	1
+	repeats.1.0.norm1.weight      	[128]                    	128
+	repeats.1.0.norm1.bias        	[128]                    	128
+	repeats.1.0.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.1.0.depthwise_conv.bias	[128]                    	128
+	repeats.1.0.nonlinearity2.weight	[1]                      	1
+	repeats.1.0.norm2.weight      	[128]                    	128
+	repeats.1.0.norm2.bias        	[128]                    	128
+	repeats.1.0.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.1.0.skip_out.bias     	[64]                     	64
+	repeats.1.0.res_out.weight    	[256, 128, 1]            	32768
+	repeats.1.0.res_out.bias      	[256]                    	256
+	repeats.1.1.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.1.1.conv1x1.bias      	[128]                    	128
+	repeats.1.1.nonlinearity1.weight	[1]                      	1
+	repeats.1.1.norm1.weight      	[128]                    	128
+	repeats.1.1.norm1.bias        	[128]                    	128
+	repeats.1.1.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.1.1.depthwise_conv.bias	[128]                    	128
+	repeats.1.1.nonlinearity2.weight	[1]                      	1
+	repeats.1.1.norm2.weight      	[128]                    	128
+	repeats.1.1.norm2.bias        	[128]                    	128
+	repeats.1.1.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.1.1.skip_out.bias     	[64]                     	64
+	repeats.1.1.res_out.weight    	[256, 128, 1]            	32768
+	repeats.1.1.res_out.bias      	[256]                    	256
+	repeats.1.2.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.1.2.conv1x1.bias      	[128]                    	128
+	repeats.1.2.nonlinearity1.weight	[1]                      	1
+	repeats.1.2.norm1.weight      	[128]                    	128
+	repeats.1.2.norm1.bias        	[128]                    	128
+	repeats.1.2.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.1.2.depthwise_conv.bias	[128]                    	128
+	repeats.1.2.nonlinearity2.weight	[1]                      	1
+	repeats.1.2.norm2.weight      	[128]                    	128
+	repeats.1.2.norm2.bias        	[128]                    	128
+	repeats.1.2.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.1.2.skip_out.bias     	[64]                     	64
+	repeats.1.2.res_out.weight    	[256, 128, 1]            	32768
+	repeats.1.2.res_out.bias      	[256]                    	256
+	repeats.1.3.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.1.3.conv1x1.bias      	[128]                    	128
+	repeats.1.3.nonlinearity1.weight	[1]                      	1
+	repeats.1.3.norm1.weight      	[128]                    	128
+	repeats.1.3.norm1.bias        	[128]                    	128
+	repeats.1.3.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.1.3.depthwise_conv.bias	[128]                    	128
+	repeats.1.3.nonlinearity2.weight	[1]                      	1
+	repeats.1.3.norm2.weight      	[128]                    	128
+	repeats.1.3.norm2.bias        	[128]                    	128
+	repeats.1.3.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.1.3.skip_out.bias     	[64]                     	64
+	repeats.1.3.res_out.weight    	[256, 128, 1]            	32768
+	repeats.1.3.res_out.bias      	[256]                    	256
+	repeats.1.4.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.1.4.conv1x1.bias      	[128]                    	128
+	repeats.1.4.nonlinearity1.weight	[1]                      	1
+	repeats.1.4.norm1.weight      	[128]                    	128
+	repeats.1.4.norm1.bias        	[128]                    	128
+	repeats.1.4.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.1.4.depthwise_conv.bias	[128]                    	128
+	repeats.1.4.nonlinearity2.weight	[1]                      	1
+	repeats.1.4.norm2.weight      	[128]                    	128
+	repeats.1.4.norm2.bias        	[128]                    	128
+	repeats.1.4.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.1.4.skip_out.bias     	[64]                     	64
+	repeats.1.4.res_out.weight    	[256, 128, 1]            	32768
+	repeats.1.4.res_out.bias      	[256]                    	256
+	repeats.1.5.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.1.5.conv1x1.bias      	[128]                    	128
+	repeats.1.5.nonlinearity1.weight	[1]                      	1
+	repeats.1.5.norm1.weight      	[128]                    	128
+	repeats.1.5.norm1.bias        	[128]                    	128
+	repeats.1.5.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.1.5.depthwise_conv.bias	[128]                    	128
+	repeats.1.5.nonlinearity2.weight	[1]                      	1
+	repeats.1.5.norm2.weight      	[128]                    	128
+	repeats.1.5.norm2.bias        	[128]                    	128
+	repeats.1.5.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.1.5.skip_out.bias     	[64]                     	64
+	repeats.1.5.res_out.weight    	[256, 128, 1]            	32768
+	repeats.1.5.res_out.bias      	[256]                    	256
+	repeats.2.0.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.2.0.conv1x1.bias      	[128]                    	128
+	repeats.2.0.nonlinearity1.weight	[1]                      	1
+	repeats.2.0.norm1.weight      	[128]                    	128
+	repeats.2.0.norm1.bias        	[128]                    	128
+	repeats.2.0.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.2.0.depthwise_conv.bias	[128]                    	128
+	repeats.2.0.nonlinearity2.weight	[1]                      	1
+	repeats.2.0.norm2.weight      	[128]                    	128
+	repeats.2.0.norm2.bias        	[128]                    	128
+	repeats.2.0.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.2.0.skip_out.bias     	[64]                     	64
+	repeats.2.0.res_out.weight    	[256, 128, 1]            	32768
+	repeats.2.0.res_out.bias      	[256]                    	256
+	repeats.2.1.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.2.1.conv1x1.bias      	[128]                    	128
+	repeats.2.1.nonlinearity1.weight	[1]                      	1
+	repeats.2.1.norm1.weight      	[128]                    	128
+	repeats.2.1.norm1.bias        	[128]                    	128
+	repeats.2.1.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.2.1.depthwise_conv.bias	[128]                    	128
+	repeats.2.1.nonlinearity2.weight	[1]                      	1
+	repeats.2.1.norm2.weight      	[128]                    	128
+	repeats.2.1.norm2.bias        	[128]                    	128
+	repeats.2.1.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.2.1.skip_out.bias     	[64]                     	64
+	repeats.2.1.res_out.weight    	[256, 128, 1]            	32768
+	repeats.2.1.res_out.bias      	[256]                    	256
+	repeats.2.2.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.2.2.conv1x1.bias      	[128]                    	128
+	repeats.2.2.nonlinearity1.weight	[1]                      	1
+	repeats.2.2.norm1.weight      	[128]                    	128
+	repeats.2.2.norm1.bias        	[128]                    	128
+	repeats.2.2.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.2.2.depthwise_conv.bias	[128]                    	128
+	repeats.2.2.nonlinearity2.weight	[1]                      	1
+	repeats.2.2.norm2.weight      	[128]                    	128
+	repeats.2.2.norm2.bias        	[128]                    	128
+	repeats.2.2.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.2.2.skip_out.bias     	[64]                     	64
+	repeats.2.2.res_out.weight    	[256, 128, 1]            	32768
+	repeats.2.2.res_out.bias      	[256]                    	256
+	repeats.2.3.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.2.3.conv1x1.bias      	[128]                    	128
+	repeats.2.3.nonlinearity1.weight	[1]                      	1
+	repeats.2.3.norm1.weight      	[128]                    	128
+	repeats.2.3.norm1.bias        	[128]                    	128
+	repeats.2.3.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.2.3.depthwise_conv.bias	[128]                    	128
+	repeats.2.3.nonlinearity2.weight	[1]                      	1
+	repeats.2.3.norm2.weight      	[128]                    	128
+	repeats.2.3.norm2.bias        	[128]                    	128
+	repeats.2.3.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.2.3.skip_out.bias     	[64]                     	64
+	repeats.2.3.res_out.weight    	[256, 128, 1]            	32768
+	repeats.2.3.res_out.bias      	[256]                    	256
+	repeats.2.4.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.2.4.conv1x1.bias      	[128]                    	128
+	repeats.2.4.nonlinearity1.weight	[1]                      	1
+	repeats.2.4.norm1.weight      	[128]                    	128
+	repeats.2.4.norm1.bias        	[128]                    	128
+	repeats.2.4.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.2.4.depthwise_conv.bias	[128]                    	128
+	repeats.2.4.nonlinearity2.weight	[1]                      	1
+	repeats.2.4.norm2.weight      	[128]                    	128
+	repeats.2.4.norm2.bias        	[128]                    	128
+	repeats.2.4.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.2.4.skip_out.bias     	[64]                     	64
+	repeats.2.4.res_out.weight    	[256, 128, 1]            	32768
+	repeats.2.4.res_out.bias      	[256]                    	256
+	repeats.2.5.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.2.5.conv1x1.bias      	[128]                    	128
+	repeats.2.5.nonlinearity1.weight	[1]                      	1
+	repeats.2.5.norm1.weight      	[128]                    	128
+	repeats.2.5.norm1.bias        	[128]                    	128
+	repeats.2.5.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.2.5.depthwise_conv.bias	[128]                    	128
+	repeats.2.5.nonlinearity2.weight	[1]                      	1
+	repeats.2.5.norm2.weight      	[128]                    	128
+	repeats.2.5.norm2.bias        	[128]                    	128
+	repeats.2.5.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.2.5.skip_out.bias     	[64]                     	64
+	repeats.2.5.res_out.weight    	[256, 128, 1]            	32768
+	repeats.2.5.res_out.bias      	[256]                    	256
+	repeats.3.0.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.3.0.conv1x1.bias      	[128]                    	128
+	repeats.3.0.nonlinearity1.weight	[1]                      	1
+	repeats.3.0.norm1.weight      	[128]                    	128
+	repeats.3.0.norm1.bias        	[128]                    	128
+	repeats.3.0.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.3.0.depthwise_conv.bias	[128]                    	128
+	repeats.3.0.nonlinearity2.weight	[1]                      	1
+	repeats.3.0.norm2.weight      	[128]                    	128
+	repeats.3.0.norm2.bias        	[128]                    	128
+	repeats.3.0.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.3.0.skip_out.bias     	[64]                     	64
+	repeats.3.0.res_out.weight    	[256, 128, 1]            	32768
+	repeats.3.0.res_out.bias      	[256]                    	256
+	repeats.3.1.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.3.1.conv1x1.bias      	[128]                    	128
+	repeats.3.1.nonlinearity1.weight	[1]                      	1
+	repeats.3.1.norm1.weight      	[128]                    	128
+	repeats.3.1.norm1.bias        	[128]                    	128
+	repeats.3.1.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.3.1.depthwise_conv.bias	[128]                    	128
+	repeats.3.1.nonlinearity2.weight	[1]                      	1
+	repeats.3.1.norm2.weight      	[128]                    	128
+	repeats.3.1.norm2.bias        	[128]                    	128
+	repeats.3.1.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.3.1.skip_out.bias     	[64]                     	64
+	repeats.3.1.res_out.weight    	[256, 128, 1]            	32768
+	repeats.3.1.res_out.bias      	[256]                    	256
+	repeats.3.2.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.3.2.conv1x1.bias      	[128]                    	128
+	repeats.3.2.nonlinearity1.weight	[1]                      	1
+	repeats.3.2.norm1.weight      	[128]                    	128
+	repeats.3.2.norm1.bias        	[128]                    	128
+	repeats.3.2.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.3.2.depthwise_conv.bias	[128]                    	128
+	repeats.3.2.nonlinearity2.weight	[1]                      	1
+	repeats.3.2.norm2.weight      	[128]                    	128
+	repeats.3.2.norm2.bias        	[128]                    	128
+	repeats.3.2.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.3.2.skip_out.bias     	[64]                     	64
+	repeats.3.2.res_out.weight    	[256, 128, 1]            	32768
+	repeats.3.2.res_out.bias      	[256]                    	256
+	repeats.3.3.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.3.3.conv1x1.bias      	[128]                    	128
+	repeats.3.3.nonlinearity1.weight	[1]                      	1
+	repeats.3.3.norm1.weight      	[128]                    	128
+	repeats.3.3.norm1.bias        	[128]                    	128
+	repeats.3.3.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.3.3.depthwise_conv.bias	[128]                    	128
+	repeats.3.3.nonlinearity2.weight	[1]                      	1
+	repeats.3.3.norm2.weight      	[128]                    	128
+	repeats.3.3.norm2.bias        	[128]                    	128
+	repeats.3.3.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.3.3.skip_out.bias     	[64]                     	64
+	repeats.3.3.res_out.weight    	[256, 128, 1]            	32768
+	repeats.3.3.res_out.bias      	[256]                    	256
+	repeats.3.4.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.3.4.conv1x1.bias      	[128]                    	128
+	repeats.3.4.nonlinearity1.weight	[1]                      	1
+	repeats.3.4.norm1.weight      	[128]                    	128
+	repeats.3.4.norm1.bias        	[128]                    	128
+	repeats.3.4.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.3.4.depthwise_conv.bias	[128]                    	128
+	repeats.3.4.nonlinearity2.weight	[1]                      	1
+	repeats.3.4.norm2.weight      	[128]                    	128
+	repeats.3.4.norm2.bias        	[128]                    	128
+	repeats.3.4.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.3.4.skip_out.bias     	[64]                     	64
+	repeats.3.4.res_out.weight    	[256, 128, 1]            	32768
+	repeats.3.4.res_out.bias      	[256]                    	256
+	repeats.3.5.conv1x1.weight    	[128, 256, 1]            	32768
+	repeats.3.5.conv1x1.bias      	[128]                    	128
+	repeats.3.5.nonlinearity1.weight	[1]                      	1
+	repeats.3.5.norm1.weight      	[128]                    	128
+	repeats.3.5.norm1.bias        	[128]                    	128
+	repeats.3.5.depthwise_conv.weight	[128, 1, 3]              	384
+	repeats.3.5.depthwise_conv.bias	[128]                    	128
+	repeats.3.5.nonlinearity2.weight	[1]                      	1
+	repeats.3.5.norm2.weight      	[128]                    	128
+	repeats.3.5.norm2.bias        	[128]                    	128
+	repeats.3.5.skip_out.weight   	[64, 128, 1]             	8192
+	repeats.3.5.skip_out.bias     	[64]                     	64
+	repeats.3.5.res_out.weight    	[256, 128, 1]            	32768
+	repeats.3.5.res_out.bias      	[256]                    	256
+	output.0.weight               	[1]                      	1
+	output.1.weight               	[128, 64, 1]             	8192
+	output.1.bias                 	[128]                    	128
+	conv_1.weight                 	[128, 8, 64]             	65536
+	conv_2.0.weight               	[128, 1, 128]            	16384
+	blstm.weight_ih_l0            	[256, 128]               	32768
+	blstm.weight_hh_l0            	[256, 64]                	16384
+	blstm.bias_ih_l0              	[256]                    	256
+	blstm.bias_hh_l0              	[256]                    	256
+	blstm.weight_ih_l0_reverse    	[256, 128]               	32768
+	blstm.weight_hh_l0_reverse    	[256, 64]                	16384
+	blstm.bias_ih_l0_reverse      	[256]                    	256
+	blstm.bias_hh_l0_reverse      	[256]                    	256
+	blstm.weight_ih_l1            	[256, 128]               	32768
+	blstm.weight_hh_l1            	[256, 64]                	16384
+	blstm.bias_ih_l1              	[256]                    	256
+	blstm.bias_hh_l1              	[256]                    	256
+	blstm.weight_ih_l1_reverse    	[256, 128]               	32768
+	blstm.weight_hh_l1_reverse    	[256, 64]                	16384
+	blstm.bias_ih_l1_reverse      	[256]                    	256
+	blstm.bias_hh_l1_reverse      	[256]                    	256
+	blstm.weight_ih_l2            	[256, 128]               	32768
+	blstm.weight_hh_l2            	[256, 64]                	16384
+	blstm.bias_ih_l2              	[256]                    	256
+	blstm.bias_hh_l2              	[256]                    	256
+	blstm.weight_ih_l2_reverse    	[256, 128]               	32768
+	blstm.weight_hh_l2_reverse    	[256, 64]                	16384
+	blstm.bias_ih_l2_reverse      	[256]                    	256
+	blstm.bias_hh_l2_reverse      	[256]                    	256
+	se_block.net.0.weight         	[2048, 128]              	262144
+	se_block.net.0.bias           	[2048]                   	2048
+	se_block.net.2.weight         	[128, 2048]              	262144
+	se_block.net.2.bias           	[128]                    	128
+
+	In total this network has 2752817 parameters.
+
+Loading weights for mixture from ../trainings/results/ours_S_pretrained/current_model_for_mixture.params
+Starting training with 200 minibatches per epoch ... ...
+ [mixture]	Epoch 1 of 311 took 3.62m + 0.07m + 0.01m (finished in 19.1h)	train={loss: 4723.969063, max-gradnorm: nan, reg-term: 0.002426}	valid={stereo_loss mean: 4811.087287, stereo_loss median: 4811.087287}
+/home/venv/lib/python3.7/site-packages/torch/nn/modules/conv.py:295: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at  /pytorch/aten/src/ATen/native/Convolution.cpp:660.)
+  self.padding, self.dilation, self.groups)
+/home/venv/lib/python3.7/site-packages/torch/nn/functional.py:627: UserWarning: Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /pytorch/c10/core/TensorImpl.h:1156.)
+  return torch.max_pool1d_with_indices(input, kernel_size, stride, padding, dilation, ceil_mode)
+../automix/train.py:872: FutureWarning: Non-finite norm encountered in torch.nn.utils.clip_grad_norm_; continuing anyway. Note that the default behavior will change in a future release to error out if a non-finite total norm is encountered. At that point, setting error_if_nonfinite=false will be required to retain the old behavior.
+  config['GRAD_CLIP_NORM_TYPE']))
+ [mixture]	Epoch 2 of 311 took 3.60m + 0.06m + 0.01m (finished in 18.9h)	train={loss: 161.170137, max-gradnorm: nan, reg-term: 0.001523}	valid={stereo_loss mean: 3.208285, stereo_loss median: 3.208285}
+ [mixture]	Epoch 3 of 311 took 3.59m + 0.06m + 0.01m (finished in 18.8h)	train={loss: 2.985977, max-gradnorm: nan, reg-term: 0.001186}	valid={stereo_loss mean: 2.941103, stereo_loss median: 2.941103}
+ [mixture]	Epoch 4 of 311 took 3.60m + 0.06m + 0.01m (finished in 18.8h)	train={loss: 2.819908, max-gradnorm: nan, reg-term: 0.000960}	valid={stereo_loss mean: 2.810584, stereo_loss median: 2.810584}
+ [mixture]	Epoch 5 of 311 took 3.59m + 0.06m + 0.01m (finished in 18.7h)	train={loss: 2.775841, max-gradnorm: nan, reg-term: 0.000789}	valid={stereo_loss mean: 2.752440, stereo_loss median: 2.752440}
+ [mixture]	Epoch 6 of 311 took 3.60m + 0.06m + 0.01m (finished in 18.6h)	train={loss: 2.743173, max-gradnorm: 23.423914, reg-term: 0.000656}	valid={stereo_loss mean: 2.723554, stereo_loss median: 2.723554}
+ [mixture]	Epoch 7 of 311 took 3.59m + 0.06m + 0.01m (finished in 18.6h)	train={loss: 2.724236, max-gradnorm: 21.642017, reg-term: 0.000552}	valid={stereo_loss mean: 2.813709, stereo_loss median: 2.813709}
+ [mixture]	Epoch 8 of 311 took 3.60m + 0.06m + 0.01m (finished in 18.5h)	train={loss: 2.717952, max-gradnorm: 20.937469, reg-term: 0.000470}	valid={stereo_loss mean: 2.788797, stereo_loss median: 2.788797}
+ [mixture]	Epoch 9 of 311 took 3.60m + 0.06m + 0.01m (finished in 18.5h)	train={loss: 2.670859, max-gradnorm: 16.625717, reg-term: 0.000405}	valid={stereo_loss mean: 2.656152, stereo_loss median: 2.656152}
+ [mixture]	Epoch 10 of 311 took 3.59m + 0.06m + 0.01m (finished in 18.4h)	train={loss: 2.661884, max-gradnorm: nan, reg-term: 0.000353}	valid={stereo_loss mean: 2.667622, stereo_loss median: 2.667622}
+ [mixture]	Epoch 11 of 311 took 3.59m + 0.06m + 0.01m (finished in 18.3h)	train={loss: 2.650398, max-gradnorm: 20.158243, reg-term: 0.000311}	valid={stereo_loss mean: 2.707048, stereo_loss median: 2.707048}
+ [mixture]	Epoch 12 of 311 took 3.59m + 0.06m + 0.01m (finished in 18.3h)	train={loss: 2.642376, max-gradnorm: nan, reg-term: 0.000276}	valid={stereo_loss mean: 2.636938, stereo_loss median: 2.636938}

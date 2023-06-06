@@ -247,10 +247,10 @@ config['MAX_VALIDATION_SEQ_LENGTH_TD'] = 4 * 60 * np.max(config['ACCEPTED_SAMPLI
 
 # Specify folders where the training data is stored
 config['DATA_DIR_TRAIN'] = []
-config['DATA_DIR_TRAIN'].append(('/data/martinez/audio/automix/MUSDB18/train', False))
+config['DATA_DIR_TRAIN'].append(('/home/FxNorm-automix/train', False))
 
 # Specify folders where the validation data is stored
 config['DATA_DIR_VALID'] = []
-config['DATA_DIR_VALID'].append(('/data/martinez/audio/automix/MUSDB18/val', False))
+config['DATA_DIR_VALID'].append(('/home/FxNorm-automix/val', False))
 
 # The stems in the MUSDB18 are expected to be named vocals_normalized.wav, bass_normalized.wav, drums_normalized.wav, other_normalized.wav and mixture.wav

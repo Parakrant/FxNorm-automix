@@ -5,15 +5,18 @@
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 cd "$parent_path"
 
-INPUT_FOLDER='/path/to/MUSDB18/train' # Folder that contains training dataset to be normalized and where features are computed
-INPUT_FOLDER_VAL='/path/to/MUSDB18/val' # Folder that contains validation dataset
+# INPUT_FOLDER='/path/to/MUSDB18/train' # Folder that contains training dataset to be normalized and where features are computed
+# INPUT_FOLDER_VAL='/path/to/MUSDB18/val' # Folder that contains validation dataset
+
+INPUT_FOLDER='/home/FxNorm-automix/train' # Folder that contains training dataset to be normalized and where features are computed
+INPUT_FOLDER_VAL='/home/FxNorm-automix/val' # Folder that contains validation dataset
 
 # The following are the paths to the folders containing the impulse responses. 
 # The data loader expects each IR to be in an individual folder and named impulse_response.wav
 # e.g. /path/to/IR/impulse-response-001/impulse_response.wav
 # Stereo or Mono are supported
-PATH_IR="/path/to/f" # IRs for data augmentation
-PATH_PRE_IR="/path/to/PRE_IR" # IRs for data pre-augmentation if the dataset corresponds to dry stems
+PATH_IR="/home/FxNorm-automix/ir" # IRs for data augmentation
+PATH_PRE_IR="/home/FxNorm-automix/ir-pre" # IRs for data pre-augmentation if the dataset corresponds to dry stems
 
 PATH_FEATURES="../trainings/features" # Path to average features file
 

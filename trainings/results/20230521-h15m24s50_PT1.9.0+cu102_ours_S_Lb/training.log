@@ -1,0 +1,12 @@
+Starting training:
+	        Results folder: ../trainings/results/20230521-h15m24s50_PT1.9.0+cu102_ours_S_Lb
+	    Configuration file: ../configs/ISMIR/ours_S_Lb.py
+	Experiment description: ours_S_Lb
+
+Traceback (most recent call last):
+  File "../automix/train.py", line 94, in <module>
+    exec(open(args.config_file).read())
+  File "<string>", line 252, in <module>
+  File "/home/dl_conda/enter/envs/gpu/lib/python3.7/site-packages/automix/common_losses.py", line 55, in __init__
+    assert guard_left >= 0  # we shouldn't allow negative slicing
+AssertionError
